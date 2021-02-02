@@ -1,0 +1,18 @@
+<form action="/museums/<%= @museum.id %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="PATCH" />
+  <p>Museum name:</p>
+  <input type='text' name='museum[name]' value='<%= @museum.name %>'/><br/>
+  <p>City:</p>
+  <input type='text' name='museum[city]' value='<%= @museum.city %>'/><br/>
+  <p>Admission Cost:</p>
+  <input type='number' min=0 name='museum[admission_cost]' value='<%= @museum.admission_cost %>'/><br/>
+  <p>Works by old masters:</p>
+  <input type="radio" id='yes' name="museum[old_masters]" value="true">
+  <label for="yes">Yes</label><br>
+  <input type="radio" id ='no' name="museum[old_masters]" value="false">
+  <label for="no">No</label><br>
+  <p>Architect:</p>
+  <input type='text' name='museum[architect]' value='<%= @museum.architect %>'/><br/>
+  <input type='submit'/>
+</form>

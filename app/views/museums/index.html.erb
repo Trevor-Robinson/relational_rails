@@ -1,0 +1,13 @@
+<h1>All Museums</h1>
+
+<a href="/museums/new">New Museum</a></li>
+
+<% @museums.each do |museum| %>
+  <h3><a href="/museums/<%= museum.id %>"><%= museum.name%></a></h3>
+  <a href="/museums/<%= museum.id %>/edit">Edit</a>
+  <form action="/museums/<%= museum.id %>" method="POST">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="delete"/>
+  </form>
+<% end %>
