@@ -29,7 +29,6 @@ class MuseumsController < ApplicationController
 
   def update
     museum = Museum.find(params[:id])
-    binding.pry
     museum.update({
       name: params[:museum][:name],
       city: params[:museum][:city],

@@ -6,8 +6,7 @@ class CreateMuseum < ActiveRecord::Migration[5.2]
       t.integer :admission_cost
       t.string :old_masters
       t.string :architect
-      t.datetime :created_at
-      t.datetime :updated_at
+      t.timestamps
     end
   end
 end

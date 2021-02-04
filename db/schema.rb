@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_02_214211) do
+ActiveRecord::Schema.define(version: 2021_02_04_214345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,18 +21,21 @@ ActiveRecord::Schema.define(version: 2021_02_02_214211) do
     t.integer "admission_cost"
     t.string "old_masters"
     t.string "architect"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "tasks", force: :cascade do |t|
+  create_table "works_of_art", force: :cascade do |t|
     t.string "name"
-    t.string "city"
-    t.integer "admission_cost"
-    t.string "old_masters"
-    t.string "architect"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string "artist"
+    t.integer "year"
+    t.string "on_display"
+    t.string "medium"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "museum_id"
+    t.index ["museum_id"], name: "index_works_of_art_on_museum_id"
   end
 
+  add_foreign_key "works_of_art", "museums"
 end
