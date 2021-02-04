@@ -1,0 +1,4 @@
+
+class Program < ApplicationRecord
+
+end
