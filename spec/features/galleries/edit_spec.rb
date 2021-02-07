@@ -32,3 +32,16 @@ end
 # Then a `POST` request is sent to the '/parents' route,
 # a new parent record is created,
 # and I am redirected to the Parent Index page where I see the new Parent displayed.
+
+#
+# [ ] done
+#
+# User Story 5, Parent Delete (x2)
+#
+# As a visitor
+# When I visit a parent show page
+# Then I see a link to delete the parent
+# When I click the link "Delete Parent"
+# Then a 'DELETE' request is sent to '/parents/:id',
+# the parent is deleted, and all child records are deleted
+# and I am redirected to the parent index page where I no longer see this parent

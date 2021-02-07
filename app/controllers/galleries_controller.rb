@@ -4,7 +4,7 @@ class GalleriesController < ApplicationController
   end
 
   def show
-    @gallery = Gallery.find(params[:id])
+    @venue = Gallery.find(params[:id])
   end
 
   def new
@@ -14,11 +14,13 @@ class GalleriesController < ApplicationController
     Gallery.create(name: params[:name],
                  capacity: params[:capacity],
                  tech_support: params[:tech_support])
+
+                 gallery.save
     redirect_to "/galleries"
   end
 
   def edit
-    @gallery = Gallery.find(params[:id])
+    @venue = Gallery.find(params[:id])
   end
 
   def update
