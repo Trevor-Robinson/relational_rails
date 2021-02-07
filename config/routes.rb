@@ -11,4 +11,7 @@ Rails.application.routes.draw do
   patch '/galleries/:id', to: 'galleries#update'
   delete '/galleries/:id', to: 'galleries#destroy'
 
+  # Programs
+  get '/programs', to: 'programs#index'
+
 end
