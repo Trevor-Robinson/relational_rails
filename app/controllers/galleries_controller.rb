@@ -1,4 +1,5 @@
 class GalleriesController < ApplicationController
+
   def index
     @galleries = Gallery.all
   end
@@ -11,26 +12,31 @@ class GalleriesController < ApplicationController
   end
 
   def create
-    Gallery.create(name: params[:name],
-                 capacity: params[:capacity],
-                 tech_support: params[:tech_support])
-    redirect_to "/galleries"
+    gallery = Gallery.create({
+                              name: params[:gallery][:name],
+                              tech_support: params[:gallery][:tech_support],
+                              capacity: params[:gallery][:capacity]
+                              })
+
+    redirect_to '/galleries'
   end
 
   def edit
-    @gallery = Gallery.find(params[:id])
+     @gallery = Gallery.find(params[:id])
   end
 
-  def update
-    new_gallery = Gallery.find(params[:id])
-    new_gallery.update(name: params[:name],
-                 capacity: params[:capacity],
-                 tech_support: params[:tech_support])
-    redirect_to "/galleries/#{new_gallery.id}"
-  end
+   def update
+     gallery = Gallery.find(params[:id])
+     gallery.update({
+                     name: params[:gallery][:name],
+                     tech_support: params[:gallery][:tech_support],
+                     capacity: params[:gallery][:capacity]
+                     })
+     redirect_to "/galleries/#{gallery.id}"
+   end
 
-  def destroy
-    Gallery.destroy(params[:id])
-    redirect_to '/galleries'
-  end
-end
+   def destroy
+     Gallery.destroy(params[:id])
+     redirect_to '/galleries'
+   end
+ end
