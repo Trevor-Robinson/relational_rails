@@ -6,7 +6,7 @@
   <%= text_field_tag :capacity %><br>
 
   <%= label_tag :tech_support %>
-  <%= hidden_field_tag :tech_support, ''%>
+  <%= hidden_field_tag :tech_support, false %>
   <%= check_box_tag :tech_support, true %><br>
   <%= submit_tag 'Submit' %>
 <% end %>

@@ -2,3 +2,4 @@
 <%= @gallery.capacity %><br>
 <%= @gallery.tech_support %><br>
 <%= link_to 'Update Gallery', "/galleries/#{@gallery.id}/edit" %>
+<%= link_to 'Remove Gallery', "/galleries/#{@gallery.id}", method: :delete %>
