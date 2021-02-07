@@ -1,12 +1,17 @@
-<%= form_tag '/galleries', method: :post do %>
-  <%= label_tag "name" %>
-  <%= text_field_tag :name %><br>
 
-  <%= label_tag "capacity" %>
-  <%= text_field_tag :capacity %><br>
+<h1>New Gallery Room</h1>
 
-  <%= label_tag :tech_support %>
-  <%= hidden_field_tag :tech_support, false %>
-  <%= check_box_tag :tech_support, true %><br>
-  <%= submit_tag 'Submit' %>
-<% end %>
+<form action='/galleries' method='post'>
+  <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token %>">
+  <label for='galleryname'>GalleryRoom name: </label>
+  <input id='galleryname' type='text' name='gallery[name]'/><br/>
+
+  <label for='supoort_tech'>Has Projector: </label>
+  <input id='supoort_tech' type='boolean' name='gallery[tech_support]'/><br/>
+
+  <label for='capacity'>Capacity: </label>
+  <input id='capacity' type='number' name='gallery[capacity]'/><br/>
+
+  <input type='submit' value='Create Gallery Room'/>
+
+</form>

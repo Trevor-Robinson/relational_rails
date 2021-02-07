@@ -1,12 +1,16 @@
-<%= form_tag "/galleries/#{@gallery.id}", method: :patch do %>
-  <%= label_tag :name %>
-  <%= text_field_tag :name %><br>
+<h1>Update Gallery Room </h1>
 
-  <%= label_tag :capacity %>
-  <%= text_field_tag :capacity %><br>
+<form action='/galleries/<%= @gallery.id %>' method='post'>
+  <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token %>">
+  <input type='hidden' name="_method" value="PATCH" />
 
-  <%= label_tag :tech_support %>
-  <%= hidden_field_tag :tech_support, ''%>
-  <%= check_box_tag :tech_support, true %><br>
-  <%= submit_tag 'Submit' %>
-<% end %>
+  <label for='galleryname'>Gallery Room name: </label>
+  <input id='galleryname' type='text' name='gallery[name]' value='<%= @gallery.name %>'/><br/>
+
+  <label for='capacity'>Capacity: </label>
+  <input id='capacity' type='number' name='gallery[capacity]' value='<%= @gallery.capacity %>'/><br/>
+
+  <label for='supoort_tech'>Supports Tech: </label>
+  <input id='supoort_tech' type='boolean' name='gallery[tech_support]' value='<%= @gallery.tech_support %>'/><br/>
+  <input type='submit' value='Update Gallery Room'/>
+</form>
