@@ -1,3 +1,11 @@
+
+<h1>Programs</h1>
+<p><%= "#{@programs.count} programs" %></p>
 <% @programs.each do |program| %>
-  <%= program.name %>
+
+  <h3><a href="/programs/<%= program.id %>"><%= program.name %></a></h3>
+  <h3><a href="/programs/<%= program.id %>"><%= program.number_of_participants %></a></h3>
+
 <% end %>
+<br>
+<a href="/galleries/<%= params[:id] %>/programs/new">Create Program</a>
