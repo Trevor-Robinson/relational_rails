@@ -1,4 +1,3 @@
-
 class Program < ApplicationRecord
 
 end

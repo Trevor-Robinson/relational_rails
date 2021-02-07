@@ -28,4 +28,9 @@ class GalleriesController < ApplicationController
                  tech_support: params[:tech_support])
     redirect_to "/galleries/#{new_gallery.id}"
   end
+
+  def destroy
+    Gallery.destroy(params[:id])
+    redirect_to '/galleries'
+  end
 end

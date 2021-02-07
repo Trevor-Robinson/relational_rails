@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   get 'galleries/:id/edit', to: 'galleries#edit'
   post '/galleries', to: 'galleries#create'
   patch '/galleries/:id', to: 'galleries#update'
+  delete '/galleries/:id', to: 'galleries#destroy'
+
 end
