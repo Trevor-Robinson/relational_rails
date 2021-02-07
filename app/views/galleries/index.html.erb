@@ -1,5 +1,11 @@
-<% @galleries.each do |gallery| %>
-  <%= gallery.name%><br>
+
+<h1>All Gallery Rooms</h1>
+<% @galleries.each do |gallery|%>
+<h2>Name: <%= link_to gallery.name, "/galleries/#{gallery.id}" %> </h2>
+<h3>Capacity: <%= gallery.capacity %></h3>
+<p>Supports Tech: <%= gallery.tech_support %></p><br>
+
+<a href='/galleries/<% gallery.id %>/edit'>Update Gallery Room</a>
 <% end %>
 
-<%= link_to 'New Gallery', '/galleries/new' %>
+<%= link_to "New Gallery Room", "/galleries/new" %>

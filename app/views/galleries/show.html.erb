@@ -1,5 +1,9 @@
-<%= @gallery.name %><br>
-<%= @gallery.capacity %><br>
-<%= @gallery.tech_support %><br>
-<%= link_to 'Update Gallery', "/galleries/#{@gallery.id}/edit" %>
-<%= link_to 'Remove Gallery', "/galleries/#{@gallery.id}", method: :delete %>
+
+<a href="/galleries">Gallery Room Index</a>
+
+<h1>Name: <%= @gallery.name %></h1>
+<h2>Supports tech: <%= @gallery.tech_support %></h2>
+<h3>Capacity: <%= @gallery.capacity %></h3>
+
+<%= button_to 'Delete Gallery Room', "/galleries/#{@gallery.id}", method: :delete %>
+<a href="/galleries/<%= @gallery.id %>/edit">Update Gallery Room</a>
