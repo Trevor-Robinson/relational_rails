@@ -1,0 +1,5 @@
+<%= form_tag "/programs/#{@program.id}", method: :patch do %>
+  <%= label_tag :name %>
+  <%= text_field_tag :name %><br>
+  <%= submit_tag 'Update Program Info' %>
+<% end %>

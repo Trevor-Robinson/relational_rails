@@ -13,5 +13,9 @@ Rails.application.routes.draw do
 
   # Programs
   get '/programs', to: 'programs#index'
+  get '/programs/:id', to: 'programs#show'
+  get '/programs/:id/edit', to: 'programs#edit'
+  patch '/programs/:id', to: 'programs#update'
+  delete '/programs/:id', to: 'programs#destroy'
 
 end
