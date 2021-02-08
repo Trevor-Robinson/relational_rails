@@ -2,15 +2,17 @@
 
 <form action='/galleries/<%= @gallery.id %>' method='post'>
   <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token %>">
+  <input type='hidden' name='previous_request' value="<%= request.referrer %>">
   <input type='hidden' name="_method" value="PATCH" />
 
-  <label for='galleryname'>Gallery Room name: </label>
+  <label for='galleryname'>Gallery Room: </label>
   <input id='galleryname' type='text' name='gallery[name]' value='<%= @gallery.name %>'/><br/>
 
   <label for='capacity'>Capacity: </label>
-  <input id='capacity' type='number' name='gallery[capacity]' value='<%= @gallery.capacity %>'/><br/>
+  <input id='capacity' type='bigint' name='gallery[capacity]' value='<%= @gallery.capacity %>'/><br/>
 
-  <label for='supoort_tech'>Supports Tech: </label>
-  <input id='supoort_tech' type='boolean' name='gallery[tech_support]' value='<%= @gallery.tech_support %>'/><br/>
+  <label for='tech_support'>Supports Technology: </label>
+  <input id='tech_support' type='boolean' name='gallery[tech_support]' value='<%= @gallery.tech_support %>'/><br/>
+
   <input type='submit' value='Update Gallery Room'/>
 </form>

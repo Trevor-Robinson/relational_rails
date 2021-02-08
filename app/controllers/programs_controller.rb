@@ -1,7 +1,7 @@
 class ProgramsController < ApplicationController
 
   def index
-    @programs = Program.all
+    @programs = Program.where('number_of_participants > ?', params[:number_of_participants]|| 0).order(params[:sort], created_at: :desc)
   end
 
   def show
@@ -13,8 +13,8 @@ class ProgramsController < ApplicationController
   end
 
   def create
-    gallery = Gallery.find(params[:gallery_id])
-    gallery.programs.create({
+    program_gallery = Gallery.find(params[:gallery_id])
+    program_gallery.programs.create({
       name: params[:program][:name],
       number_of_participants: params[:program][:number_of_participants],
 
