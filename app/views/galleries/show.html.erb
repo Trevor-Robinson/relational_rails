@@ -1,9 +1,9 @@
+<a href="/galleries/<%= @gallery.id %>/programs">View Gallerys</a>
 
-<a href="/galleries">Gallery Room Index</a>
-
-<h1>Name: <%= @gallery.name %></h1>
-<h2>Supports tech: <%= @gallery.tech_support %></h2>
+<p <%= "#{@gallery.programs.count} programs" %></p>
+<h1>Name: <%= link_to @gallery.name, request.path %></h1>
+<h2>Supports Technology: <%= @gallery.tech_support %></h2>
 <h3>Capacity: <%= @gallery.capacity %></h3>
 
-<%= button_to 'Delete Gallery Room', "/galleries/#{@gallery.id}", method: :delete %>
-<a href="/galleries/<%= @gallery.id %>/edit">Update Gallery Room</a>
+<%= button_to 'Delete Gallery', "/galleries/#{@gallery.id}", method: :delete %>
+<a href="/galleries/<%= @gallery.id %>/edit">Update Gallery</a>

@@ -1,17 +1,17 @@
-
-<h1>New Gallery Room</h1>
+<h1>New Gallery</h1>
 
 <form action='/galleries' method='post'>
   <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token %>">
-  <label for='galleryname'>GalleryRoom name: </label>
+
+  <label for='galleryname'>Gallery name: </label>
   <input id='galleryname' type='text' name='gallery[name]'/><br/>
 
-  <label for='supoort_tech'>Has Projector: </label>
-  <input id='supoort_tech' type='boolean' name='gallery[tech_support]'/><br/>
+  <label for='gallerytech_support'>Supports Technology: </label>
+  <input id='gallerytech_support' type='boolean' name='gallery[tech_support]'/><br/>
 
   <label for='capacity'>Capacity: </label>
-  <input id='capacity' type='number' name='gallery[capacity]'/><br/>
+  <input id='capacity' type='bigint' name='gallery[capacity]'/><br/>
 
-  <input type='submit' value='Create Gallery Room'/>
+  <input type='submit' value='Create Program Gallery'/>
 
 </form>
