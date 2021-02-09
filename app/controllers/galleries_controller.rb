@@ -21,10 +21,10 @@ class GalleriesController < ApplicationController
 
   def create
     gallery = Gallery.create({
-                                    name: params[:gallery][:name],
-                                    tech_support: params[:gallery][:tech_support],
-                                    capacity: params[:gallery][:capacity]
-                                    })
+                              name: params[:gallery][:name],
+                              tech_support: params[:gallery][:tech_support],
+                              capacity: params[:gallery][:capacity]
+                              })
 
     redirect_to '/galleries'
   end
