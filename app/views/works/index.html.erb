@@ -1,0 +1,5 @@
+<h1>All Works of Art</h1>
+
+<% @works.display_true.each do |work| %>
+  <h3><a href="/works/<%= work.id %>"><%= work.name%></a></h3>
+<% end %>

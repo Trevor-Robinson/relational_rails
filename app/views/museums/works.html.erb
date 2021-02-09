@@ -1,0 +1,11 @@
+<h1>All Works of Art at <%=@museum.name%></h1>
+
+<a href="/museums/<%= @museum.id %>/works/new">Create New Work</a></li>
+
+<% @works.each do |work| %>
+  <h3><a href="/works/<%= work.id %>"><%= work.name%></a></h3>
+  <p> Artist: <%= work.artist %></p>
+  <p> Year Created: <%= work.year %></p>
+  <p> On Display: <%= work.on_display %></p>
+  <p> Medium: <%= work.medium %></p>
+<% end %>

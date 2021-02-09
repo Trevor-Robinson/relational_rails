@@ -1,5 +1,6 @@
 class MuseumsController < ApplicationController
   def index
+    # @museums = Museum.all.order(created_at: :desc)
     @museums = Museum.all
   end
 
@@ -41,7 +42,16 @@ class MuseumsController < ApplicationController
   end
 
   def destroy
+    museum = Museum.find(params[:id])
+    museum.works.each do |work|
+      work.destroy
+    end
     Museum.destroy(params[:id])
     redirect_to '/museums'
+  end
+
+  def works
+    @museum = Museum.find(params[:id])
+    @works = @museum.works
   end
 end

@@ -1,6 +1,6 @@
-class CreateWorkOfArt < ActiveRecord::Migration[5.2]
+class CreateWork < ActiveRecord::Migration[5.2]
   def change
-    create_table :works_of_art do |t|
+    create_table :works do |t|
       t.string :name
       t.string :artist
       t.integer :year

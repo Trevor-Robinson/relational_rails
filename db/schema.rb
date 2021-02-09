@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2021_02_04_214345) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "works_of_art", force: :cascade do |t|
+  create_table "works", force: :cascade do |t|
     t.string "name"
     t.string "artist"
     t.integer "year"
@@ -34,8 +34,8 @@ ActiveRecord::Schema.define(version: 2021_02_04_214345) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "museum_id"
-    t.index ["museum_id"], name: "index_works_of_art_on_museum_id"
+    t.index ["museum_id"], name: "index_works_on_museum_id"
   end
 
-  add_foreign_key "works_of_art", "museums"
+  add_foreign_key "works", "museums"
 end
