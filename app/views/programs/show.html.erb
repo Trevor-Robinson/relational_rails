@@ -1,0 +1,5 @@
+<h1><%= link_to @program.name, "/programs/#{@program.id}" %></h1>
+<h1><%= link_to @program.program_gallery.name, "/galleries/#{@program.program_gallery.id}" %></h1>
+<h2>Number of Participants: <%= @program.number_of_participants %></h2>
+
+<h1><%= link_to 'Update Program', "/programs/#{@program.id}/edit" %></h1>

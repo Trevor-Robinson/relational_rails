@@ -1,0 +1,14 @@
+<h1>New Program</h1>
+
+<form action='/programs' method='post'>
+  <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token %>">
+  <input type='hidden' name='gallery_id' value="<%= params[:id] %>">
+
+  <label for='programname'>Program name: </label>
+  <input id='programname' type='text' name='program[name]'/><br/>
+
+  <label for='number_of_participants'>Number of Participants: </label>
+  <input id='number_of_participants' type='bigint' name='program[number_of_participants]'/><br/>
+
+  <input type='submit' value='Create Program'/>
+</form>
