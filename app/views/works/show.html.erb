@@ -1,0 +1,12 @@
+<a href="/works">Works of Art Index</a>
+<h1><%= @work.name %></h1>
+<p> Artist: <%= @work.artist %></p>
+<p> Year Created: <%= @work.year %></p>
+<p> On Display: <%= @work.on_display %></p>
+<p> Medium: <%= @work.medium %></p>
+<a href="/works/<%= @work.id %>/edit">Edit</a>
+<form action="/works/<%= @work.id %>" method="POST">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="delete"/>
+</form>

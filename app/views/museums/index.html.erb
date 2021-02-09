@@ -1,0 +1,7 @@
+<h1>All Museums</h1>
+
+<a href="/museums/new">New Museum</a></li>
+
+<% @museums.most_recent_first.each do |museum| %>
+  <h3><a href="/museums/<%= museum.id %>"><%= museum.name%></a></h3>
+<% end %>

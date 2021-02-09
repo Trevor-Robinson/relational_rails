@@ -1,0 +1,18 @@
+<form action="/works/<%= @work.id %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="PATCH" />
+  <p>work name:</p>
+  <input type='text' name='work[name]' value='<%= @work.name %>'/><br/>
+  <p>Artist:</p>
+  <input type='text' name='work[artist]' value='<%= @work.artist %>'/><br/>
+  <p>Year Created:</p>
+  <input type='number' min=0 name='work[year]' value='<%= @work.year %>'/><br/>
+  <p>On Display:</p>
+  <input type="radio" id='yes' name="work[on_display]" value="true">
+  <label for="yes">Yes</label><br>
+  <input type="radio" id ='no' name="work[on_display]" value="false">
+  <label for="no">No</label><br>
+  <p>Medium:</p>
+  <input type='text' name='work[medium]' value='<%= @work.medium %>'/><br/>
+  <input type='submit' name='Submit'/>
+</form>
