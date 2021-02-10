@@ -1,12 +1,14 @@
-<h1>All Galleries</h1>
-
-<nav>
-  <%= link_to "New Program Gallery", "/galleries/new" %>
-  <%= link_to "New Program Gallery", "/galleries/new" %>
-  <%= link_to "New Program Gallery", "/galleries/new" %>
+<header>
+  <nav>
+    <a href="/">Art Museum Manager</a>
+    <a href='/museums'>Museums</a>
+    <a href='/works'>Works</a>
+    <a href='/galleries'>Galleries</a>
+    <a href='/programs'>Programs</a>
   </nav>
+</header>
 
-
+<h1>All Meeting Rooms</h1>
 <%= form_tag '/galleries', method: :get do %>
   <%= number_field_tag :capacity %>
   <%= submit_tag 'Only return records with more than minimum capacity' %>
@@ -16,13 +18,12 @@
     <h2>Name: <%= link_to gallery.name, "/galleries/#{gallery.id}" %> </h2>
     <h3>Capacity: <%= gallery.capacity %></h3>
     <p><%= "#{gallery.programs.count} programs" %></p>
-    <p>Supports Technology <%= gallery.tech_support %></p><br>
-
-
-    <a href='/galleries/<%= gallery.id %>/edit'>Update Program Gallery</a><br>
-  <%= button_to 'Delete Program Gallery', "/galleries/#{gallery.id}", method: :delete%><br>
+    <p>Supports Technology: <%= gallery.tech_support %></p>
+    <br>
+    <a href='/galleries/<%= gallery.id %>/edit'>Update Meeting Room</a><br>
+  <%= button_to 'Delete Meeting Room', "/galleries/#{gallery.id}", method: :delete%><br>
 
   </div>
 <% end %>
 <%= link_to 'Sort by Number of Programs', "/galleries?sort=true" %><br>
-<%= link_to "New Program Gallery", "/galleries/new" %>
+<%= link_to "New Gallery", "/galleries/new" %>

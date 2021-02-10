@@ -1,4 +1,14 @@
-<a href="/galleries/<%= @gallery.id %>/programs">View Gallerys</a>
+<header>
+  <nav>
+    <a href="/">Art Museum Manager</a>
+    <a href='/museums'>Museums</a>
+    <a href='/works'>Works</a>
+    <a href='/galleries'>Galleries</a>
+    <a href='/programs'>Programs</a>
+  </nav>
+</header>
+
+<a href="/galleries/<%= @gallery.id %>/programs">View Gallery</a>
 
 <p <%= "#{@gallery.programs.count} programs" %></p>
 <h1>Name: <%= link_to @gallery.name, request.path %></h1>

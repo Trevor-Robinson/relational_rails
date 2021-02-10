@@ -1,17 +1,23 @@
+<header>
+  <nav>
+    <a href="/">Art Museum Manager</a>
+    <a href='/museums'>Museums</a>
+    <a href='/works'>Works</a>
+    <a href='/galleries'>Galleries</a>
+    <a href='/programs'>Programs</a>
+  </nav>
+</header>
+
 <h1>New Gallery</h1>
 
 <form action='/galleries' method='post'>
   <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token %>">
-
-  <label for='galleryname'>Gallery name: </label>
-  <input id='galleryname' type='text' name='gallery[name]'/><br/>
-
-  <label for='gallerytech_support'>Supports Technology: </label>
-  <input id='gallerytech_support' type='boolean' name='gallery[tech_support]'/><br/>
-
+  <label for='metname'>Gallery name: </label>
+  <input id='metname' type='text' name='gallery[name]'/><br/>
+  <label for='mettech_support'>Supports Technology: </label>
+  <input id='mettech_support' type='checkbox' name='gallery[tech_support]'/><br/>
   <label for='capacity'>Capacity: </label>
   <input id='capacity' type='bigint' name='gallery[capacity]'/><br/>
-
-  <input type='submit' value='Create Program Gallery'/>
+  <input type='submit' value='Create Gallery'/>
 
 </form>

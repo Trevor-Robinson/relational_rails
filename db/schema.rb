@@ -10,19 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 2021_02_04_214345) do
+ActiveRecord::Schema.define(version: 2021_02_07_194636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-
-  create_table "museums", force: :cascade do |t|
-    t.string "name"
-    t.string "city"
-    t.integer "admission_cost"
-    t.string "old_masters"
-    t.string "architect"
 
   create_table "galleries", force: :cascade do |t|
     t.string "name"
@@ -32,6 +23,24 @@ ActiveRecord::Schema.define(version: 2021_02_04_214345) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "museums", force: :cascade do |t|
+    t.string "name"
+    t.string "city"
+    t.integer "admission_cost"
+    t.string "old_masters"
+    t.string "architect"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "programs", force: :cascade do |t|
+    t.string "name"
+    t.integer "number_of_participants"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "gallery_id"
+    t.index ["gallery_id"], name: "index_programs_on_gallery_id"
+  end
 
   create_table "works", force: :cascade do |t|
     t.string "name"
@@ -45,16 +54,6 @@ ActiveRecord::Schema.define(version: 2021_02_04_214345) do
     t.index ["museum_id"], name: "index_works_on_museum_id"
   end
 
-  add_foreign_key "works", "museums"
-  
-  create_table "programs", force: :cascade do |t|
-    t.string "name"
-    t.integer "number_of_participants"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "gallery_id"
-    t.index ["gallery_id"], name: "index_programs_on_gallery_id"
-  end
-
   add_foreign_key "programs", "galleries"
+  add_foreign_key "works", "museums"
 end
