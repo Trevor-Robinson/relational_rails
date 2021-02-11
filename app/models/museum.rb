@@ -1,9 +1,5 @@
 class Museum < ApplicationRecord
-  has_many :works
-
-  def self.most_recent_first
-    order(created_at: :desc)
-  end
+  has_many :works, dependent: :destroy
 
   def total_works
     works.count

@@ -1,7 +1,12 @@
+<nav>
+  <a href="/museums">Museum Index</a>
+  <a href="/works">Artwork Index</a>
+</nav>
 <h1>All Museums</h1>
 
 <a href="/museums/new">New Museum</a></li>
 
-<% @museums.most_recent_first.each do |museum| %>
-  <h3><a href="/museums/<%= museum.id %>"><%= museum.name%></a></h3>
+<% @museums.each do |museum| %>
+  <h2><a href="/museums/<%= museum.id %>"><%= museum.name%></a></h2>
+  <%= button_to 'Delete Museum', "/museums/#{museum.id}", method: :delete %> <%= button_to 'Edit Museum', "/museums/#{museum.id}/edit", method: :get %>
 <% end %>

@@ -16,5 +16,41 @@ RSpec.describe 'museums index page', type: :feature do
     click_link "New Museum"
     expect(current_path).to eq("/museums/new")
   end
+  it "can see and interact with museums index link" do
+    museum_1 = Museum.create(id: 1, name: "Test Museum", city: "Nowhere", admission_cost: 15, old_masters: "false", architect: "No One")
+
+    visit '/museums'
+
+    click_on 'Museum Index'
+    expect(current_path).to eq("/museums")
+  end
+  it "can see and interact with Artwork index link" do
+    museum_1 = Museum.create(id: 1, name: "Test Museum", city: "Nowhere", admission_cost: 15, old_masters: "false", architect: "No One")
+
+    visit '/museums'
+
+    click_on 'Artwork Index'
+    expect(current_path).to eq("/works")
+  end
+
+  it "can see and interact with edit buttons" do
+    museum_1 = Museum.create(id: 1, name: "Test Museum", city: "Nowhere", admission_cost: 15, old_masters: "false", architect: "No One")
+
+    visit "/museums"
+
+    click_on 'Edit Museum'
+
+    expect(current_path).to eq("/museums/1/edit")
+  end
+
+  it "can see and interact with delete buttons" do
+    museum_1 = Museum.create(id: 1, name: "Test Museum", city: "Nowhere", admission_cost: 15, old_masters: "false", architect: "No One")
+
+    visit "/museums"
+    click_on 'Delete Museum'
+
+    expect(current_path).to eq("/museums")
+    expect(page).to_not have_content "Test Museum"
+  end
 
 end

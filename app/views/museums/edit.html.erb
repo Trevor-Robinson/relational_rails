@@ -1,3 +1,7 @@
+<nav>
+  <a href="/museums">Museum Index</a>
+  <a href="/works">Artwork Index</a>
+</nav>
 <form action="/museums/<%= @museum.id %>" method="post">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <input type="hidden" name="_method" value="PATCH" />
