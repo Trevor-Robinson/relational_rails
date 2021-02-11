@@ -8,16 +8,18 @@
   </nav>
 </header>
 
-<h1>New Gallery</h1>
+<h1>New Gallery</h1><br>
 
-<form action='/galleries' method='post'>
-  <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token %>">
-  <label for='metname'>Gallery name: </label>
-  <input id='metname' type='text' name='gallery[name]'/><br/>
-  <label for='mettech_support'>Supports Technology: </label>
-  <input id='mettech_support' type='checkbox' name='gallery[tech_support]'/><br/>
-  <label for='capacity'>Capacity: </label>
-  <input id='capacity' type='bigint' name='gallery[capacity]'/><br/>
-  <input type='submit' value='Create Gallery'/>
+<%= form_tag '/galleries' do %>
+  <%= label_tag  "Gallery name"%>
+  <%= text_field_tag :name %><br>
 
-</form>
+  <%= label_tag :capacity %>
+  <%= number_field_tag :capacity %><br>
+
+  <%= label_tag :tech_support %>
+  <%= hidden_field_tag :tech_support, false %>
+  <%= check_box_tag :tech_support, true %><br>
+
+  <%= submit_tag "Create Gallery" %>
+<% end %>

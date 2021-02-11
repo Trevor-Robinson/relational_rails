@@ -9,15 +9,13 @@ class ProgramsController < ApplicationController
   end
 
   def new
+
   end
 
   def create
-    gallery = Gallery.find(params[:gallery_id])
-    gallery.programs.create({
-                              name: params[:program][:name],
-                              number_of_participants: params[:program][:number_of_participants],
-                              })
-    redirect_to "/gallerys/#{params[:gallery_id]}/programs"
+    Program.create(programs_params)
+
+    redirect_to "/galleries/#{params[:id]}/programs"
   end
 
   def edit
@@ -25,17 +23,18 @@ class ProgramsController < ApplicationController
   end
 
   def update
-    @program = Program.find(params[:id])
-    @program.update({
-                      name: params[:program][:name],
-                      number_of_participants: params[:program][:number_of_participants],
-                      })
-
+    Program.find(params[:id]).update(programs_params)
     redirect_to params[:previous_request]
   end
 
   def destroy
     Program.destroy(params[:id])
     redirect_to params[:previous_request]
+  end
+
+  private
+
+  def programs_params
+    params.permit(:gallery_id, :name, :number_of_participants).merge(params[:program])
   end
 end

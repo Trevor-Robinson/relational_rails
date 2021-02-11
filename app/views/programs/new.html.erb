@@ -10,13 +10,13 @@
 
 <h1>New Program</h1>
 
-<form action='/programs' method='post'>
-  <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token %>">
-  <input type='hidden' name='program_room_id' value="<%= params[:id] %>">
-  <label for='mename'>Program name: </label>
-  <input id='mename' type='text' name='program[name]'/><br/>
-  <label for='number_of_participants'>Number of Participants: </label>
-  <input id='number_of_participants' type='bigint' name='program[number_of_participants]'/><br/>
+  <%= form_tag "/galleries/#{params[:id]}/programs" do %>
+  <%= hidden_field_tag :gallery_id, params[:id] %>
+  <%= label_tag "Program name: " %>
 
-  <input type='submit' value='Create Program'/>
-</form>
+  <%= text_field_tag :name %><br>
+  <%= label_tag :number_of_participants %>
+
+  <%= number_field_tag :number_of_participants %><br>
+  <%= submit_tag "Create Program"  %>
+<% end %>

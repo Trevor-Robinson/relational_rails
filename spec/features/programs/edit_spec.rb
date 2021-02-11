@@ -3,25 +3,27 @@ require 'rails_helper'
 describe 'Edit Program page' do
   it 'has a form to edit the program' do
     gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
-    program1 = Gallery.programs.create(name: "Painting Lillies",number_of_participants: 26)
+    program1 = gallery1.programs.create!(name: "Painting Lillies", number_of_participants: 26)
+
 
     visit "/programs/#{program1.id}/edit"
 
     expect(page).to have_content("Update Program #{program1.name}")
     expect(page).to have_selector('form')
-    expect(page).to have_text('Program Name:')
-    expect(page).to have_field('mename', type: 'text')
+    expect(page).to have_text('Program name')
+    expect(page).to have_field(:name)
   end
 
   it 'updates the attributes of the program' do
     gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
-    program1 = Gallery.programs.create(name: "Painting Lillies",number_of_participants: 26)
+    program1 = gallery1.programs.create!(name: "Painting Lillies", number_of_participants: 26)
+
 
     visit "/programs/#{program1.id}"
 
     click_on('Update Program')
     expect(page).to have_button('Update Program', type: 'submit')
-    fill_in('mename', with: 'Painting Lillies')
+    fill_in(:name, with: 'Painting Lillies')
 
     click_on('Update Program')
 
@@ -30,34 +32,37 @@ describe 'Edit Program page' do
 
   it 'allows you to individual attributes of the program' do
     gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
-    program1 = Gallery.programs.create(name: "Painting Lillies",number_of_participants: 26)
+    program1 = gallery1.programs.create!(name: "Painting Lillies", number_of_participants: 26)
+
 
     visit "/programs/#{program1.id}"
     click_on('Update Program')
 
-    fill_in 'Program Name', with: 'Finger Paint'
+    fill_in :name, with: 'Painting Gallery'
     click_on('Update Program')
 
-    expect(page).to have_content("Finger Paint")
+    expect(page).to have_content("Painting Gallery")
     end
   end
   describe 'site navigation' do
     it 'has a navigation bar with links to other index pages' do
       gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
-      program1 = Gallery.programs.create(name: "Painting Lillies",number_of_participants: 26)
+      program1 = gallery1.programs.create!(name: "Painting Lillies", number_of_participants: 26)
+
 
       visit "/programs/#{program1.id}/edit"
 
-      expect(page).to have_link("Art Museum Manager")
-      expect(page).to have_link("Museum")
-      expect(page).to have_link("Works")
-      expect(page).to have_link("Galleries")
-      expect(page).to have_link("Programs")
+      expect(page).to have_link('Art Museum Manager')
+      expect(page).to have_link('Museum')
+      expect(page).to have_link('Works')
+      expect(page).to have_link('Galleries')
+      expect(page).to have_link('Programs')
     end
 
     it 'navigates to the welcome page' do
       gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
-      program1 = Gallery.programs.create(name: "Painting Lillies",number_of_participants: 26)
+      program1 = gallery1.programs.create!(name: "Painting Lillies", number_of_participants: 26)
+
 
       visit "/programs/#{program1.id}/edit"
 
@@ -68,7 +73,8 @@ describe 'Edit Program page' do
 
     it 'navigates to the galleries page' do
       gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
-      program1 = Gallery.programs.create(name: "Painting Lillies",number_of_participants: 26)
+      program1 = gallery1.programs.create!(name: "Painting Lillies", number_of_participants: 26)
+
 
       visit "/programs/#{program1.id}/edit"
 
@@ -79,7 +85,8 @@ describe 'Edit Program page' do
 
     it 'navigates to the programs page' do
       gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
-      program1 = Gallery.programs.create(name: "Painting Lillies",number_of_participants: 26)
+      program1 = gallery1.programs.create!(name: "Painting Lillies", number_of_participants: 26)
+
 
       visit "/programs/#{program1.id}/edit"
 
