@@ -1,7 +1,6 @@
 class WorksController < ApplicationController
   def index
-    # @works = Work.all.where(on_display: "true")
-    @works = Work.all
+    @works = Work.where(on_display: "true")
   end
 
   def new

@@ -1,5 +1,11 @@
+<nav>
+  <a href="/museums">Museum Index</a>
+  <a href="/works">Artwork Index</a>
+</nav>
 <h1>All Works of Art</h1>
 
-<% @works.display_true.each do |work| %>
+<% @works.each do |work| %>
   <h3><a href="/works/<%= work.id %>"><%= work.name%></a></h3>
+  <%= button_to 'Delete Work', "/works/#{work.id}", method: :delete %>
+  <%= button_to 'Edit Work', "/works/#{work.id}/edit", method: :get %>
 <% end %>
