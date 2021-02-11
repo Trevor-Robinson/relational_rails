@@ -8,22 +8,23 @@
   </nav>
 </header>
 
-<h1>All Meeting Rooms</h1>
+<h1>All Galleries</h1>
+<%= link_to "New Gallery", "/galleries/new" %><br>
+
 <%= form_tag '/galleries', method: :get do %>
+<p><%= link_to 'Sort by Number of Programs', "/galleries?sort=true" %></p>
+<%= submit_tag 'Only return records with more than the minimum capacity' %>
   <%= number_field_tag :capacity %>
-  <%= submit_tag 'Only return records with more than minimum capacity' %>
 <% end %>
 <% @galleries.each_with_index do |gallery, index|%>
   <div id="<%= "row-#{index}" %>">
+    <hr>
     <h2>Name: <%= link_to gallery.name, "/galleries/#{gallery.id}" %> </h2>
-    <h3>Capacity: <%= gallery.capacity %></h3>
+    <h4>Capacity: <%= gallery.capacity %></h4>
     <p><%= "#{gallery.programs.count} programs" %></p>
     <p>Supports Technology: <%= gallery.tech_support %></p>
-    <br>
-    <a href='/galleries/<%= gallery.id %>/edit'>Update Meeting Room</a><br>
-  <%= button_to 'Delete Meeting Room', "/galleries/#{gallery.id}", method: :delete%><br>
 
+  <p><%= link_to "Update Gallery", "/galleries/#{gallery.id}/edit" %></p>
+  <%= button_to 'Delete Gallery', "/galleries/#{gallery.id}", method: :delete%><br>
   </div>
 <% end %>
-<%= link_to 'Sort by Number of Programs', "/galleries?sort=true" %><br>
-<%= link_to "New Gallery", "/galleries/new" %>

@@ -1,17 +1,20 @@
 require 'rails_helper'
 
-describe 'as a visitor' do
+RSpec.describe 'as a visitor' do
   describe 'show gallery page' do
     it 'displays the gallery with that id and its attributes' do
-      gallery1 = Gallery.create!(name: "Painting Gallery", capacity: 30, tech_support: true)
+      gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
+
 
       visit "/galleries/#{gallery1.id}"
 
       expect(page).to have_content(gallery1.name)
+      expect(page).to have_content(gallery1.capacity)
     end
 
     it 'has a link to update the gallery' do
-      gallery1 = Gallery.create!(name: "Painting Gallery", capacity: 30, tech_support: true)
+      gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
+
 
       visit "/galleries/#{gallery1.id}"
 
@@ -22,22 +25,26 @@ describe 'as a visitor' do
       expect(page).to have_current_path("/galleries/#{gallery1.id}/edit")
     end
 
-    it 'can delete the Gallery record' do
-      gallery1 = Gallery.create!(name: "Painting Gallery", capacity: 30, tech_support: true)
+    it 'can delete the gallery record' do
+      gallery = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
 
-      visit "/galleries/#{gallery1.id}"
 
-    expect(page).to have_link("View Meetings")
+      visit "/galleries/#{gallery.id}"
 
-    click_on("View Meetings")
+      expect(page).to have_button("Delete Gallery")
 
-    expect(page).to have_current_path("/galleries/#{gallery1.id}/programs")
+      click_on("Delete Gallery")
+
+      expect(page).to have_current_path("/galleries")
+      expect(page).not_to have_content(gallery.name)
+    end
 
     describe 'site navigation' do
       it 'has a navigation bar with links to other index pages' do
-        gallery1 = Gallery.create!(name: "Painting Gallery", capacity: 30, tech_support: true)
+        gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
 
         visit "/galleries/#{gallery1.id}"
+
 
         expect(page).to have_link("Art Museum Manager")
         expect(page).to have_link("Museum")
@@ -47,7 +54,7 @@ describe 'as a visitor' do
       end
 
       it 'navigates to the welcome page' do
-        gallery1 = Gallery.create!(name: "Painting Gallery", capacity: 30, tech_support: true)
+        gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
 
         visit "/galleries/#{gallery1.id}"
 
@@ -57,7 +64,7 @@ describe 'as a visitor' do
       end
 
       it 'navigates to the galleries page' do
-        gallery1 = Gallery.create!(name: "Painting Gallery", capacity: 30, tech_support: true)
+        gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
 
         visit "/galleries/#{gallery1.id}"
 
@@ -66,8 +73,8 @@ describe 'as a visitor' do
         expect(page).to have_current_path('/galleries')
       end
 
-      it 'navigates to the galleries page' do
-        gallery1 = Gallery.create!(name: "Painting Gallery", capacity: 30, tech_support: true)
+      it 'navigates to the gallerys page' do
+        gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
 
         visit "/galleries/#{gallery1.id}"
 
@@ -76,18 +83,18 @@ describe 'as a visitor' do
         expect(page).to have_current_path('/galleries')
       end
 
-      it 'navigates to the   page' do
-        gallery1 = Gallery.create!(name: "Painting Gallery", capacity: 30, tech_support: true)
+      it 'navigates to the programs page' do
+        gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
 
         visit "/galleries/#{gallery1.id}"
 
-        click_on("Programs")
+        click_on("Galleries")
 
         expect(page).to have_current_path('/programs')
       end
 
       it 'navigates to the programs page' do
-        gallery1 = Gallery.create!(name: "Painting Gallery", capacity: 30, tech_support: true)
+        gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
 
         visit "/galleries/#{gallery1.id}"
 
@@ -96,8 +103,8 @@ describe 'as a visitor' do
         expect(page).to have_current_path('/programs')
       end
 
-      it 'has a link to view its  ' do
-        gallery1 = Gallery.create!(name: "Painting Gallery", capacity: 30, tech_support: true)
+      it 'has a link to view its Programs' do
+        gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
 
         visit "/galleries/#{gallery1.id}"
 
@@ -109,7 +116,7 @@ describe 'as a visitor' do
       end
 
       it 'has a link to itself' do
-        gallery1 = Gallery.create!(name: "Painting Gallery", capacity: 30, tech_support: true)
+        gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
 
         visit "/galleries/#{gallery1.id}"
 

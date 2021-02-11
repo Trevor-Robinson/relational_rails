@@ -20,11 +20,7 @@ class GalleriesController < ApplicationController
   end
 
   def create
-    gallery = Gallery.create({
-                              name: params[:gallery][:name],
-                              tech_support: params[:gallery][:tech_support],
-                              capacity: params[:gallery][:capacity]
-                              })
+    Gallery.create(gallery_params)
 
     redirect_to '/galleries'
   end
@@ -34,12 +30,8 @@ class GalleriesController < ApplicationController
   end
 
    def update
-     gallery = Gallery.find(params[:id])
-     gallery.update({
-                     name: params[:gallery][:name],
-                     tech_support: params[:gallery][:tech_support],
-                     capacity: params[:gallery][:capacity]
-                     })
+     Gallery.find(params[:id]).update(gallery_params)
+
      redirect_to params[:previous_request]
    end
 
@@ -48,7 +40,9 @@ class GalleriesController < ApplicationController
      redirect_to '/galleries'
    end
 
-   def galleries_params
-     params.permit(:name, :tech_support, :capacity)
+   private
+
+   def gallery_params
+     params.permit(:name, :has_projector, :capacity)
    end
  end

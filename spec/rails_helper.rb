@@ -72,3 +72,9 @@ end
      with.library :rails
    end
   end
+
+  RSpec::Matchers.define :appear_before do |later_content|
+    match do |earlier_content|
+      page.text.index(earlier_content) < page.text.index(later_content)
+    end
+  end

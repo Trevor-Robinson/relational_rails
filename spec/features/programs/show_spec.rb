@@ -1,34 +1,36 @@
 require 'rails_helper'
 
-RSpec.describe 'show program page' do
-  it 'displays the program with a given id and its attributes' do
+RSpec.describe 'show meeting page' do
+  it 'displays the meeting with a given id and its attributes' do
     gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
-    program1 = gallery1.programs.create(name: "Painting Lillies", number_of_participants: 26)
+    program1 = gallery1.programs.create!(name: "Painting Lillies", number_of_participants: 26)
+
 
     visit "/programs/#{program1.id}"
 
     expect(page).to have_content(program1.name)
     expect(page).to have_content(program1.number_of_participants)
-
   end
 
   describe 'site navigation' do
     it 'has a navigation bar with links to other index pages' do
       gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
-      program1 = gallery1.programs.create(name: "Painting Lillies", number_of_participants: 26)
+      program1 = gallery1.programs.create!(name: "Painting Lillies", number_of_participants: 26)
+
 
       visit "/programs/#{program1.id}"
 
-      expect(page).to have_link("Art Museum Manager")
-      expect(page).to have_link("Museum")
-      expect(page).to have_link("Works")
-      expect(page).to have_link("Galleries")
-      expect(page).to have_link("Programs")
+      expect(page).to have_link('Art Museum Manager')
+      expect(page).to have_link('Museum')
+      expect(page).to have_link('Works')
+      expect(page).to have_link('Galleries')
+      expect(page).to have_link('Programs')
     end
 
     it 'navigates to the welcome page' do
       gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
-      program1 = gallery1.programs.create(name: "Painting Lillies", number_of_participants: 26)
+      program1 = gallery1.programs.create!(name: "Painting Lillies", number_of_participants: 26)
+
 
       visit "/programs/#{program1.id}"
 
@@ -39,7 +41,8 @@ RSpec.describe 'show program page' do
 
     it 'navigates to the galleries page' do
       gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
-      program1 = gallery1.programs.create(name: "Painting Lillies", number_of_participants: 26)
+      program1 = gallery1.programs.create!(name: "Painting Lillies", number_of_participants: 26)
+
 
       visit "/programs/#{program1.id}"
 
@@ -48,9 +51,10 @@ RSpec.describe 'show program page' do
       expect(page).to have_current_path('/galleries')
     end
 
-    it 'navigates to the galleries page' do
+    it 'navigates to the meeting rooms page' do
       gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
-      program1 = gallery1.programs.create(name: "Painting Lillies", number_of_participants: 26)
+      program1 = gallery1.programs.create!(name: "Painting Lillies", number_of_participants: 26)
+
 
       visit "/programs/#{program1.id}"
 
@@ -61,7 +65,8 @@ RSpec.describe 'show program page' do
 
     it 'navigates to the programs page' do
       gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
-      program1 = gallery1.programs.create(name: "Painting Lillies", number_of_participants: 26)
+      program1 = gallery1.programs.create!(name: "Painting Lillies", number_of_participants: 26)
+
 
       visit "/programs/#{program1.id}"
 
@@ -72,7 +77,8 @@ RSpec.describe 'show program page' do
 
     it 'navigates to the programs page' do
       gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
-      program1 = gallery1.programs.create(name: "Painting Lillies", number_of_participants: 26)
+      program1 = gallery1.programs.create!(name: "Painting Lillies", number_of_participants: 26)
+
 
       visit "/programs/#{program1.id}"
 
@@ -81,9 +87,10 @@ RSpec.describe 'show program page' do
       expect(page).to have_current_path('/programs')
     end
 
-    it 'has a link to view its galleries' do
+    it 'has a link to view its meeting_room' do
       gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
-      program1 = gallery1.programs.create(name: "Painting Lillies", number_of_participants: 26)
+      program1 = gallery1.programs.create!(name: "Painting Lillies", number_of_participants: 26)
+
 
       visit "/programs/#{program1.id}"
 
@@ -96,7 +103,8 @@ RSpec.describe 'show program page' do
 
     it 'has a link to itself' do
       gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
-      program1 = gallery1.programs.create(name: "Painting Lillies", number_of_participants: 26)
+      program1 = gallery1.programs.create!(name: "Painting Lillies", number_of_participants: 26)
+
 
       visit "/programs/#{program1.id}"
 

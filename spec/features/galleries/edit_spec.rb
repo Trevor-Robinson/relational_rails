@@ -1,17 +1,18 @@
 require 'rails_helper'
 
-describe 'edit galleries page' do
-  it 'has a form to edit the attributes of the Gallery' do
+RSpec.describe 'edit galleries page' do
+  it 'has a form to edit the attributes of the program room' do
     gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
+
 
     visit "/galleries/#{gallery1.id}/edit"
 
     expect(page).to have_content("Update Gallery")
     expect(page).to have_selector('form')
-    expect(page).to have_text('Gallery name:')
-    expect(page).to have_field('metname', type: 'text')
-    expect(page).to have_text('Capacity:')
-    expect(page).to have_field('capacity', type: 'bigint')
+    expect(page).to have_text("Gallery name")
+    expect(page).to have_field(:name)
+    expect(page).to have_text('Capacity')
+    expect(page).to have_field(:capacity)
   end
 
   it 'updates the attributes of the gallery' do
@@ -22,12 +23,12 @@ describe 'edit galleries page' do
     click_on 'Update Gallery'
     expect(page).to have_button('Update Gallery', type: 'submit')
 
-    fill_in('metname', with: 'Painting Gallery')
-    fill_in('capacity', with: 30)
+    fill_in(:name, with: 'Oprah')
+    fill_in(:capacity, with: 30)
     click_on('Update Gallery')
 
     expect(page).to have_current_path("/galleries/#{gallery1.id}")
-    expect(page).to have_content("Painting Gallery")
+    expect(page).to have_content("Oprah")
   end
 
   describe 'site navigation' do
@@ -66,7 +67,7 @@ describe 'edit galleries page' do
       expect(page).to have_current_path('/galleries')
     end
 
-    it 'navigates to the galleries page' do
+    it 'navigates to the program rooms page' do
       gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
 
 
@@ -75,17 +76,6 @@ describe 'edit galleries page' do
       click_on("Galleries")
 
       expect(page).to have_current_path('/galleries')
-    end
-
-    it 'navigates to the programs page' do
-      gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
-
-
-      visit "/galleries/#{gallery1.id}/edit"
-
-      click_on("Programs")
-
-      expect(page).to have_current_path('/programs')
     end
 
     it 'navigates to the programs page' do

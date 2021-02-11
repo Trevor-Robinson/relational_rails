@@ -18,3 +18,26 @@ met.works.create!(name: 'History of Navigation', artist: 'Jean Dupas', year: 193
 aic.works.create!(name: 'The Bedroom', artist: 'Vincent van Gogh', year: 1889, on_display: "true", medium: "Oil on canvas")
 aic.works.create!(name: 'A Sunday on La Grande Jatte', artist: 'Georges Seurat', year: 1884, on_display: "true", medium: "Oil on canvas")
 aic.works.create!(name: 'Nighthawks', artist: 'Edward Hopper', year: 1942, on_display: "true", medium: "Oil on canvas")
+
+
+
+
+Gallery.destroy_all
+Program.destroy_all
+
+gallery1 = Gallery.create!(name: "Painting Gallery", capacity: 10, tech_support: true)
+gallery2 = Gallery.create!(name: "Clay Gallery", capacity: 15, tech_support: true)
+gallery3 = Gallery.create!(name: "Photgraphy Gallery", capacity: 30, tech_support: true)
+gallery4 = Gallery.create!(name: "Smell Gallery", capacity: 20, tech_support: true)
+gallery5 = Gallery.create!(name: "ASMR Gallery", capacity: 40, tech_support: true)
+gallery6 = Gallery.create!(name: "Large Gallery", capacity: 100, tech_support: false)
+
+
+program1 = gallery1.programs.create!(name: "Painting Lillies", number_of_participants: 26)
+program2 = gallery2.programs.create!(name: "Instagram Photos", number_of_participants: 26)
+program3 = gallery2.programs.create!(name: "Clay Scultures", number_of_participants: 26)
+program4 = gallery5.programs.create!(name: "Dark and Sounds", number_of_participants: 26)
+program5 = gallery6.programs.create!(name: "Fundraiser Gala", number_of_participants: 90)
+program6 = gallery1.programs.create!(name: "Painting Lillies", number_of_participants: 26)
+program7 = gallery3.programs.create!(name: "Painting Lillies", number_of_participants: 26)
+program8 = gallery1.programs.create!(name: "Clay Sculptures", number_of_participants: 26)

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'As a visitor' do
   describe 'When I visit /programs' do
-    it 'Shows the meeting and its attributes' do
+    it 'Shows the program and its attributes' do
       gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
       program1 = gallery1.programs.create!(name: "Painting Lillies", number_of_participants: 26)
 
@@ -14,18 +14,20 @@ describe 'As a visitor' do
     end
   end
 
-  it 'can show the programs associated with a given meeting_room' do
+  it 'can show the programs associated with a given gallery' do
     gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
     program1 = gallery1.programs.create!(name: "Painting Lillies", number_of_participants: 26)
 
-    visit "/galleries/#{program1.id}/programs"
+
+    visit "/galleries/#{gallery1.id}/programs"
 
     expect(page).to have_content(program1.name)
   end
 
-  it 'has a link to add a new meeting' do
+  it 'has a link to add a new program' do
     gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
     program1 = gallery1.programs.create!(name: "Painting Lillies", number_of_participants: 26)
+
 
 
    visit "/galleries/#{gallery1.id}/programs"
@@ -39,7 +41,8 @@ describe 'As a visitor' do
 
  it 'displays a count of the number of programs associated with the conference' do
    gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
-   program1 = gallery1.programs.create(name: "Painting Lillies", number_of_participants: 26)
+   program1 = gallery1.programs.create!(name: "Painting Lillies", number_of_participants: 26)
+
 
      visit "/galleries/#{gallery1.id}/programs"
 
@@ -48,8 +51,10 @@ describe 'As a visitor' do
 
    it 'shows all records above a given threshold' do
      gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
-     program1 = gallery1.programs.create!(name: "Painting Lillies",number_of_participants: 26)
-     program2 = gallery1.programs.create!(name: "Clay Sculpt", number_of_participants: 14)
+     gallery2 = Gallery.create!(name: "Clay Gallery", capacity: 15, tech_support: true)
+
+     program1 = gallery1.programs.create!(name: "Painting Lillies", number_of_participants: 26)
+     program2 = gallery2.programs.create!(name: "Instagram Photos", number_of_participants: 26)
 
 
      visit '/programs'
@@ -66,27 +71,33 @@ describe 'As a visitor' do
 
    it 'sorts programs in alphabetical order' do
      gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
-     program1 = gallery1.programs.create!(name: "Painting Lillies",number_of_participants: 26)
-     program2 = gallery1.programs.create!(name: "Clay Sculpt", number_of_participants: 14)
+     gallery2 = Gallery.create!(name: "Clay Gallery", capacity: 15, tech_support: true)
+
+     program1 = gallery1.programs.create!(name: "Painting Lillies", number_of_participants: 26)
+     program2 = gallery2.programs.create!(name: "Instagram Photos", number_of_participants: 26)
+
 
       visit "/galleries/#{gallery1.id}/programs"
       expect(page).to have_link("Sort Alphabetically")
       click_on("Sort Alphabetically")
       expect(current_path).to eq("/galleries/#{gallery1.id}/programs")
-      expect(program1.name).to appear_before(program2.name)
+      expect(program2.name).to appear_before(program1.name)
    end
 
-   it 'has links to the edit page for each meeting' do
+   it 'has links to the edit page for each program' do
      gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
-     program1 = gallery1.programs.create!(name: "Painting Lillies",number_of_participants: 26)
-     program2 = gallery1.programs.create!(name: "Clay Sculpt", number_of_participants: 14)
+     gallery2 = Gallery.create!(name: "Clay Gallery", capacity: 15, tech_support: true)
+
+     program1 = gallery1.programs.create!(name: "Painting Lillies", number_of_participants: 26)
+     program2 = gallery2.programs.create!(name: "Instagram Photos", number_of_participants: 26)
+
 
      visit '/programs'
 
-     within('#row-0') { expect(page).to have_link("Update Program") }
-     within('#row-1') { expect(page).to have_link("Update Program") }
+      expect(page).to have_link("Update Program")
+      expect(page).to have_link("Update Program")
 
-     within('#row-0') { click_on("Update Program") }
+      click_on("Update Program")
 
      expect(page).to have_current_path("/programs/#{program2.id}/edit")
 
@@ -97,15 +108,18 @@ describe 'As a visitor' do
 
    it 'has links to delete each presentation' do
      gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
-     program1 = gallery1.programs.create!(name: "Painting Lillies",number_of_participants: 26)
-     program2 = gallery1.programs.create!(name: "Clay Sculpt", number_of_participants: 14)
+     gallery2 = Gallery.create!(name: "Clay Gallery", capacity: 15, tech_support: true)
+
+     program1 = gallery1.programs.create!(name: "Painting Lillies", number_of_participants: 26)
+     program2 = gallery2.programs.create!(name: "Instagram Photos", number_of_participants: 26)
+
 
      visit '/programs'
 
-     within('#row-0') { expect(page).to have_button("Delete Program") }
-     within('#row-1') { expect(page).to have_button("Delete Program") }
+      expect(page).to have_button("Delete Program")
+      expect(page).to have_button("Delete Program")
 
-     within('#row-0') { click_on("Delete Program") }
+     click_on("Delete Program")
 
      expect(page).to have_current_path('/programs')
      expect(page).not_to have_content(program2.name)
@@ -115,11 +129,11 @@ describe 'As a visitor' do
       it 'has a navigation bar with links to other index pages' do
         visit '/programs'
 
-        expect(page).to have_link("Art Museum Manager")
-        expect(page).to have_link("Museum")
-        expect(page).to have_link("Works")
-        expect(page).to have_link("Galleries")
-        expect(page).to have_link("Programs")
+        expect(page).to have_link('Art Museum Manager')
+        expect(page).to have_link('Museum')
+        expect(page).to have_link('Works')
+        expect(page).to have_link('Galleries')
+        expect(page).to have_link('Programs')
       end
 
       it 'navigates to the welcome page' do
@@ -139,8 +153,11 @@ describe 'As a visitor' do
 
       it 'has links to navigate to galleries' do
         gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
-        program1 = gallery1.programs.create!(name: "Painting Lillies",number_of_participants: 26)
-        program2 = gallery1.programs.create!(name: "Clay Sculpt",number_of_participants: 14)
+        gallery2 = Gallery.create!(name: "Clay Gallery", capacity: 15, tech_support: true)
+        program1 = gallery1.programs.create!(name: "Painting Lillies", number_of_participants: 26)
+        program2 = gallery2.programs.create!(name: "Instagram Photos", number_of_participants: 26)
+
+
 
         visit '/programs'
 

@@ -8,12 +8,11 @@
   </nav>
 </header>
 
-<a href="/galleries/<%= @gallery.id %>/programs">View Gallery</a>
-
-<p <%= "#{@gallery.programs.count} programs" %></p>
 <h1>Name: <%= link_to @gallery.name, request.path %></h1>
-<h2>Supports Technology: <%= @gallery.tech_support %></h2>
-<h3>Capacity: <%= @gallery.capacity %></h3>
+<p>Capacity: <%= @gallery.capacity %></p>
+<p>Supports Technology: <%= @gallery.tech_support %></p>
+<p><%= "#{@gallery.programs.count} programs" %></p>
 
+<h3><%= link_to "View Galleries", "/galleries/#{@gallery.id}/programs" %></h3>
+<h3><%= link_to "Update Gallery", "/galleries/#{@gallery.id}/edit"%></h4>
 <%= button_to 'Delete Gallery', "/galleries/#{@gallery.id}", method: :delete %>
-<a href="/galleries/<%= @gallery.id %>/edit">Update Gallery</a>

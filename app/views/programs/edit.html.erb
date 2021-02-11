@@ -10,11 +10,13 @@
 
 <h1>Update Program <%= @program.name %></h1>
 
-<form action='/programs/<%= @program.id %>' method='post'>
-  <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token %>">
-  <input type='hidden' name='previous_request' value="<%= request.referrer %>">
-  <input type='hidden' name="_method" value="PATCH" />
-  <label for='mename'>Program Name: </label>
-  <input id='mename' type='text' name='program[name]' value='<%= @program.name %>'/><br/>
-  <input type='submit' value='Update Program'/>
-</form>
+  <%= form_tag "/programs/#{@program.id}", method: :patch do %>
+  <%= hidden_field_tag :previous_request, request.referrer %>
+  <%= label_tag "Program name: " %>
+  <%= text_field_tag :name, @program.name %><br>
+
+  <%= label_tag :number_of_participants %>
+  <%= number_field_tag :number_of_participants, @program.number_of_participants %><br>
+  
+  <%= submit_tag "Update Program"  %>
+<% end %>
