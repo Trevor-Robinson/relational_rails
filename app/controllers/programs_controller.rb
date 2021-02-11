@@ -1,7 +1,7 @@
 class ProgramsController < ApplicationController
 
   def index
-    @programs = Program.all
+    @programs = Program.where('number_of_participants > ?', params[:number_of_participants]|| 0).order(params[:sort], created_at: :desc)
   end
 
   def show
@@ -9,17 +9,13 @@ class ProgramsController < ApplicationController
   end
 
   def new
+
   end
 
   def create
-  gallery = Gallery.create({
-                            name: params[:program][:name],
-                            number_of_participants: params[:program][:number_of_participants],
-                            })
+    Program.create(programs_params)
 
-    redirect_to "/galleries/#{params[:gallery_id]}/programs"
-
-
+    redirect_to "/galleries/#{params[:id]}/programs"
   end
 
   def edit
@@ -27,14 +23,18 @@ class ProgramsController < ApplicationController
   end
 
   def update
-    @program = Program.find(params[:id])
-    @program.update({
-      name: params[:program][:name],
-      number_of_participants: params[:program][:number_of_participants],
+    Program.find(params[:id]).update(programs_params)
+    redirect_to params[:previous_request]
+  end
 
+  def destroy
+    Program.destroy(params[:id])
+    redirect_to params[:previous_request]
+  end
 
-      })
+  private
 
-    redirect_to "/programs/#{params[:id]}"
+  def programs_params
+    params.permit(:gallery_id, :name, :number_of_participants).merge(params[:program])
   end
 end

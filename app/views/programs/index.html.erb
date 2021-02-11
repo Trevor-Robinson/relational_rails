@@ -1,33 +1,48 @@
-<h1>Programs</h1>
+<header>
+  <nav>
+    <a href="/">Art Museum Manager</a>
+    <a href='/museums'>Museums</a>
+    <a href='/works'>Works</a>
+    <a href='/galleries'>Galleries</a>
+    <a href='/programs'>Programs</a>
+  </nav>
+</header>
 
-<%= link_to "Sort Alphabetically", "/galleries/#{params[:id]}/programs?sort=name" %>
+<h1>Programs</h1>
+<p><%= "#{@programs.count} programs" %></p>
+
+<% if params[:id] %>
+<%= link_to "Create Program", "/galleries/#{params[:id]}/programs/new" %>
+<% end %>
 
 <%= form_tag '/programs', method: :get do %>
+  <% if params[:id] %>
+    <%= hidden_field_tag :id, params[:id] %>
+  <% end %>
+  <%= submit_tag 'Only return records with more than minimum participants' %>
   <%= number_field_tag :number_of_participants %>
-  <%= submit_tag 'Records with more than minimum participants' %>
 <% end %>
 
 
-<p><%= "#{@programs.count} programs" %></p>
-<% @programs.each_with_index do |program, index| %>
-  <div id=<%= "row-#{index}" %>>
+<table>
+  <tr>
+    <th> Name <br> <%= link_to "Sort Alphabetically", :sort=>"name" %> </th>
+    <th> Gallery </th>
+    <th> Total Participants </th>
+    <th> Created </th>
+    <th> Update </th>
+    <th> Delete </th>
+  </tr>
 
-  <h3><a href="/programs/<%= program.id %>"><%= program.name %></a></h3>
-  <h3><a href="/galleries/<%= program.program_gallery.id %>"><%= program.program_gallery.name %></a></h3>
-  <h3><a href="/programs/<%= program.id %>"><%= program.number_of_participants %></a></h3>
-
-  <%= link_to 'Update Program', "/programs/#{program.id}/edit" %>
-  <form action='/programs/<%= program.id %>' method="post">
-    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
-
-    <input type='hidden' name='_method' value="DELETE">
-    <input type='hidden' name="previous_request" value='<%= request.path %>'>
-
-    <input type='submit' value='Delete Program'/>
-  </form>
-  </div>
+  <% @programs.each_with_index do |program, index| %>
+    <tr id=<%= "row-#{index}" %>>
+    <td><%= link_to program.name, "/programs/#{program.id}" %></td>
+    <td><%= link_to program.gallery.name, "/galleries/#{program.gallery_id}" %></td>
+    <td><%= program.number_of_participants %></td>
+    <td><%= format_timestamp(program.created_at) %></td>
+    <td><%= link_to "Update Program", "/programs/#{program.id}/edit" %></td>
+    <td><%= button_to "Delete Program", program_path(program, previous_request: request.path), method: :delete %></td>
+    </tr>
 <% end %>
-
-
 <br>
-<%= link_to "New Program ", "/programs/new" %>
+</table>

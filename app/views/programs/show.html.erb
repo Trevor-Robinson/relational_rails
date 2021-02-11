@@ -1,5 +1,16 @@
-<h1><%= link_to @program.name, "/programs/#{@program.id}" %></h1>
-<h1><%= link_to @program.program_gallery.name, "/galleries/#{@program.program_gallery.id}" %></h1>
-<h2>Number of Participants: <%= @program.number_of_participants %></h2>
+<header>
+  <nav>
+    <a href="/">Art Museum Manager</a>
+    <a href='/museums'>Museums</a>
+    <a href='/works'>Works</a>
+    <a href='/galleries'>Galleries</a>
+    <a href='/programs'>Programs</a>
+  </nav>
+</header>
 
-<h1><%= link_to 'Update Program', "/programs/#{@program.id}/edit" %></h1>
+<h3>Program name: <%= link_to @program.name, "/programs/#{@program.id}" %> </h3>
+<h4>Gallery name: <%= link_to @program.gallery.name, "/galleries/#{@program.gallery.id}" %></h4>
+<p>Number of Participants: <%= @program.number_of_participants %></p>
+
+<h4><%= link_to 'Update Program', "/programs/#{@program.id}/edit" %></h4>
+<h1><%= button_to 'Delete Program', program_path(@program, previous_request: request.referrer), method: :delete %></h1>

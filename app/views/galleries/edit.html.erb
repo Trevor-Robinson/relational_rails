@@ -1,18 +1,25 @@
-<h1>Update Gallery Room </h1>
+<header>
+  <nav>
+    <a href="/">Art Museum Manager</a>
+    <a href='/museums'>Museums</a>
+    <a href='/works'>Works</a>
+    <a href='/galleries'>Galleries</a>
+    <a href='/programs'>Programs</a>
+  </nav>
+</header>
 
-<form action='/galleries/<%= @gallery.id %>' method='post'>
-  <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token %>">
-  <input type='hidden' name='previous_request' value="<%= request.referrer %>">
-  <input type='hidden' name="_method" value="PATCH" />
+<h1>Update Gallery </h1>
 
-  <label for='galleryname'>Gallery Room: </label>
-  <input id='galleryname' type='text' name='gallery[name]' value='<%= @gallery.name %>'/><br/>
+<%= form_tag "/galleries/#{@gallery.id}", method: :patch do %>
+  <%= hidden_field_tag :previous_request, request.referrer %>
+  <%= label_tag "Gallery name" %>
+  <%= text_field_tag :name, @gallery.name %><br>
 
-  <label for='capacity'>Capacity: </label>
-  <input id='capacity' type='bigint' name='gallery[capacity]' value='<%= @gallery.capacity %>'/><br/>
+  <%= label_tag :capacity %>
+  <%= number_field_tag :capacity, @gallery.capacity %><br>
 
-  <label for='tech_support'>Supports Technology: </label>
-  <input id='tech_support' type='boolean' name='gallery[tech_support]' value='<%= @gallery.tech_support %>'/><br/>
-
-  <input type='submit' value='Update Gallery Room'/>
-</form>
+  <%= label_tag :tech_support %>
+  <%= hidden_field_tag :tech_support, false %>
+  <%= check_box_tag :tech_support, true, @gallery.tech_support %><br>
+  <%= submit_tag "Update Gallery" %>
+<% end %>

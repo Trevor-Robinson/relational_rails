@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+
 RSpec.describe Gallery do
   describe 'validations' do
     it { should validate_presence_of :name}
@@ -29,7 +30,4 @@ RSpec.describe Gallery do
     end
   end
 
-  describe 'instance methods' do
-  end
 
-end

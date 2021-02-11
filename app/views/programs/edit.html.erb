@@ -1,12 +1,22 @@
+<header>
+  <nav>
+    <a href="/">Art Museum Manager</a>
+    <a href='/museums'>Museums</a>
+    <a href='/works'>Works</a>
+    <a href='/galleries'>Galleries</a>
+    <a href='/programs'>Programs</a>
+  </nav>
+</header>
+
 <h1>Update Program <%= @program.name %></h1>
 
-<form action='/programs/<%= @program.id %>' method='post'>
-  <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token %>">
-  <input type='hidden' name='previous_request' value="<%= request.referrer %>">
-  <input type='hidden' name="_method" value="PATCH" />
+  <%= form_tag "/programs/#{@program.id}", method: :patch do %>
+  <%= hidden_field_tag :previous_request, request.referrer %>
+  <%= label_tag "Program name: " %>
+  <%= text_field_tag :name, @program.name %><br>
 
-  <label for='programname'>Program Name: </label>
-  <input id='programname' type='text' name='program[name]' value='<%= @program.name %>'/><br/>
-
-  <input type='submit' value='Update Program'/>
-</form>
+  <%= label_tag :number_of_participants %>
+  <%= number_field_tag :number_of_participants, @program.number_of_participants %><br>
+  
+  <%= submit_tag "Update Program"  %>
+<% end %>

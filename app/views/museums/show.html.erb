@@ -1,10 +1,14 @@
-<a href="/museums">Museum Index</a>
+<nav>
+  <a href="/museums">Museum Index</a>
+  <a href="/works">Artwork Index</a>
+</nav>
 <h1><%= @museum.name %></h1>
 <p> City: <%= @museum.city %></p>
 <p> Admission Cost: <%= @museum.admission_cost %></p>
 <p> Displays Works By Old Masters: <%= @museum.old_masters %></p>
 <p>Architect: <%= @museum.architect %></p>
 <p> Total Works: <%= @museum.total_works %></p>
+<%= button_to "See all works at #{@museum.name}", "/museums/#{@museum.id}/works", method: :get %>
 <a href="/museums/<%= @museum.id %>/edit">Edit</a>
 <form action="/museums/<%= @museum.id %>" method="POST">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">

@@ -1,14 +1,22 @@
+<header>
+  <nav>
+    <a href="/">Art Museum Manager</a>
+    <a href='/museums'>Museums</a>
+    <a href='/works'>Works</a>
+    <a href='/galleries'>Galleries</a>
+    <a href='/programs'>Programs</a>
+  </nav>
+</header>
+
 <h1>New Program</h1>
 
-<form action='/programs' method='post'>
-  <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token %>">
-  <input type='hidden' name='gallery_id' value="<%= params[:id] %>">
+  <%= form_tag "/galleries/#{params[:id]}/programs" do %>
+  <%= hidden_field_tag :gallery_id, params[:id] %>
+  <%= label_tag "Program name: " %>
 
-  <label for='programname'>Program name: </label>
-  <input id='programname' type='text' name='program[name]'/><br/>
+  <%= text_field_tag :name %><br>
+  <%= label_tag :number_of_participants %>
 
-  <label for='number_of_participants'>Number of Participants: </label>
-  <input id='number_of_participants' type='bigint' name='program[number_of_participants]'/><br/>
-
-  <input type='submit' value='Create Program'/>
-</form>
+  <%= number_field_tag :number_of_participants %><br>
+  <%= submit_tag "Create Program"  %>
+<% end %>

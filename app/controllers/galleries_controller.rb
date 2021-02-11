@@ -20,11 +20,7 @@ class GalleriesController < ApplicationController
   end
 
   def create
-    gallery = Gallery.create({
-                              name: params[:gallery][:name],
-                              tech_support: params[:gallery][:tech_support],
-                              capacity: params[:gallery][:capacity]
-                              })
+    Gallery.create(gallery_params)
 
     redirect_to '/galleries'
   end
@@ -34,13 +30,9 @@ class GalleriesController < ApplicationController
   end
 
    def update
-     gallery = Gallery.find(params[:id])
-     gallery.update({
-       name: params[:gallery][:name],
-       tech_support: params[:gallery][:tech_support],
-       capacity: params[:gallery][:capacity]
-       })
-     redirect_to "/galleries/#{gallery.id}"
+     Gallery.find(params[:id]).update(gallery_params)
+
+     redirect_to params[:previous_request]
    end
 
    def destroy
@@ -50,7 +42,7 @@ class GalleriesController < ApplicationController
 
    private
 
-  def programs_params
-    params.permit(:gallery_id, :name, :number_of_participants).merge(params[:program])
-  end
+   def gallery_params
+     params.permit(:name, :has_projector, :capacity)
+   end
  end

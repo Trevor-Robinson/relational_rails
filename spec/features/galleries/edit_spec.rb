@@ -1,34 +1,92 @@
 require 'rails_helper'
 
-describe 'As a visitor' do
-  describe 'when I am on the galleries program page' do
-    it 'I can update its information' do
-      sculpture_gallery = Gallery.create(name: "Sculpture Gallery", capacity: 25, tech_support: false)
+RSpec.describe 'edit galleries page' do
+  it 'has a form to edit the attributes of the program room' do
+    gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
 
-      visit "/galleries/#{sculpture_gallery.id}"
 
-      click_link "Update Gallery"
-      expect(current_path).to eq("/galleries/#{sculpture_gallery.id}/edit")
+    visit "/galleries/#{gallery1.id}/edit"
 
-      fill_in 'Name', with: 'Abstract Paintings'
-      fill_in 'Capacity', with: 12
+    expect(page).to have_content("Update Gallery")
+    expect(page).to have_selector('form')
+    expect(page).to have_text("Gallery name")
+    expect(page).to have_field(:name)
+    expect(page).to have_text('Capacity')
+    expect(page).to have_field(:capacity)
+  end
 
-      click_on 'Submit'
-      expect(current_path).to eq("/galleries/#{sculpture_gallery.id}")
-      expect(page).to have_content("Abstract Paintings")
+  it 'updates the attributes of the gallery' do
+    gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
+
+
+    visit "/galleries/#{gallery1.id}"
+    click_on 'Update Gallery'
+    expect(page).to have_button('Update Gallery', type: 'submit')
+
+    fill_in(:name, with: 'Oprah')
+    fill_in(:capacity, with: 30)
+    click_on('Update Gallery')
+
+    expect(page).to have_current_path("/galleries/#{gallery1.id}")
+    expect(page).to have_content("Oprah")
+  end
+
+  describe 'site navigation' do
+    it 'has a navigation bar with links to other index pages' do
+      gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
+
+
+      visit "/galleries/#{gallery1.id}/edit"
+
+      expect(page).to have_link("Art Museum Manager")
+      expect(page).to have_link("Museum")
+      expect(page).to have_link("Works")
+      expect(page).to have_link("Galleries")
+      expect(page).to have_link("Programs")
+    end
+
+    it 'navigates to the welcome page' do
+      gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
+
+
+      visit "/galleries/#{gallery1.id}/edit"
+
+      click_on("Art Museum Manager")
+
+      expect(page).to have_current_path('/')
+    end
+
+    it 'navigates to the galleries page' do
+      gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
+
+
+      visit "/galleries/#{gallery1.id}/edit"
+
+      click_on("Galleries")
+
+      expect(page).to have_current_path('/galleries')
+    end
+
+    it 'navigates to the program rooms page' do
+      gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
+
+
+      visit "/galleries/#{gallery1.id}/edit"
+
+      click_on("Galleries")
+
+      expect(page).to have_current_path('/galleries')
+    end
+
+    it 'navigates to the programs page' do
+      gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
+
+
+      visit "/galleries/#{gallery1.id}/edit"
+
+      click_on("Programs")
+
+      expect(page).to have_current_path('/programs')
     end
   end
 end
-
-# User Story 3, Parent Creation (x2)
-#
-# As a visitor
-# When I visit the Parent Index page
-# Then I see a link to create a new Parent record, "New Parent"
-# When I click this link
-# Then I am taken to '/parents/new' where I  see a form for a new parent record
-# When I fill out the form with a new parent's attributes:
-# And I click the button "Create Parent" to submit the form
-# Then a `POST` request is sent to the '/parents' route,
-# a new parent record is created,
-# and I am redirected to the Parent Index page where I see the new Parent displayed.
