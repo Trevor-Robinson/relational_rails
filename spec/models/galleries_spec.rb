@@ -1,30 +1,33 @@
 require 'rails_helper'
 
-describe Gallery do
-  it 'has meetings' do
-    should have_many :meetings
+
+RSpec.describe Gallery do
+  describe 'validations' do
+    it { should validate_presence_of :name}
   end
 
-  it 'selects galleries' do
-    gallery1 = create(:gallery, tech_support: true, capacity: 10)
-    gallery2 = create(:gallery, tech_support: true, capacity: 30)
-    gallery3 = create(:gallery, tech_support: false, capacity: 80)
-
-    3.times { create(:meeting, meeting_room: meeting_room_2) }
-    2.times { create(:meeting, meeting_room: meeting_room_4) }
-    1.times { create(:meeting, meeting_room: meeting_room_1) }
-
-    galleries = Gallery.select_rooms(25, "true")
-    expected = [meeting_room_2, meeting_room_4]
-    expect(galleries).to eq(expected)
-    galleries = Gallery.select_rooms(25, nil)
-    expected = [meeting_room_4, meeting_room_2]
-    expect(galleries).to eq(expected)
-    galleries = Gallery.select_rooms(nil, "true")
-    expected = [meeting_room_2, meeting_room_4, meeting_room_3, meeting_room_1]
-    expect(galleries).to eq(expected)
-    galleries = Gallery.select_rooms(nil, nil)
-    expected = [meeting_room_4, meeting_room_3, meeting_room_2, meeting_room_1]
-    expect(galleries).to eq(expected)
+  describe 'relationships' do
+    it {should belong_to :gallery}
   end
-end
+
+  describe 'class methods' do
+    it '.event_count' do
+      gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
+      gallery1.events.create!(name: "program1")
+      gallery1.events.create!(name: "program2")
+      gallery1.events.create!(name: "program3")
+
+      expect(Gallery.event_count).to eq(3)
+    end
+
+    it '.sort_alphabetically' do
+      program1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
+      program1 = gallery1.events.create!(name: "ONE")
+      program2 = gallery1.events.create!(name: "TWO")
+      program3 = gallery1.events.create!(name: "THREEE")
+
+      expect(Gallery.sort_alphabetically).to eq([program1, program2, program3])
+    end
+  end
+
+
