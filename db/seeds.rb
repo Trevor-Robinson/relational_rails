@@ -7,6 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 Museum.destroy_all
 Work.destroy_all
+Gallery.destroy_all
+Program.destroy_all
+
 dam = Museum.create!(name: "Denver Art Museum", city: "Denver", admission_cost: 15, old_masters: "false", architect: "Gio Ponti")
 met = Museum.create!(name: "The Metropolitan Museum of Art", city: "New York City", admission_cost: 0, old_masters: "true", architect: "Marcel Breuer")
 aic = Museum.create!(name: "The Art Institute of Chicago", city: "Chicago", admission_cost: 25, old_masters: "true", architect: "Renzo Piano")
@@ -19,11 +22,6 @@ aic.works.create!(name: 'The Bedroom', artist: 'Vincent van Gogh', year: 1889, o
 aic.works.create!(name: 'A Sunday on La Grande Jatte', artist: 'Georges Seurat', year: 1884, on_display: "true", medium: "Oil on canvas")
 aic.works.create!(name: 'Nighthawks', artist: 'Edward Hopper', year: 1942, on_display: "true", medium: "Oil on canvas")
 
-
-
-
-Gallery.destroy_all
-Program.destroy_all
 
 gallery1 = Gallery.create!(name: "Painting Gallery", capacity: 10, tech_support: true)
 gallery2 = Gallery.create!(name: "Clay Gallery", capacity: 15, tech_support: true)

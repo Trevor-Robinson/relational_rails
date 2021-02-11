@@ -5,11 +5,11 @@ describe 'As a User' do
     it 'Displays welcome message' do
     visit '/'
 
-    expect(page).to have_link("Art Museum Manager")
-    expect(page).to have_link("Museum")
+    expect(page).to have_content("Art Museum Manager")
+    expect(page).to have_link("Museums")
     expect(page).to have_link("Works")
     expect(page).to have_link("Galleries")
-    expect(page).to have_link("Programs")
+    expect(page).to have_link("Program")
     end
   end
 
@@ -41,7 +41,7 @@ describe 'As a User' do
     it 'navigates to the programs page' do
       visit '/'
 
-      click_on("Programs")
+      click_on("Program")
 
       expect(page).to have_current_path('/programs')
     end
