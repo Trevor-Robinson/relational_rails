@@ -57,7 +57,6 @@ describe 'New Program page' do
       gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
       program1 = gallery1.programs.create!(name: "Painting Lillies", number_of_participants: 26)
 
-
       visit "/galleries/#{gallery1.id}/programs/new"
 
       click_on("Galleries")
@@ -68,7 +67,6 @@ describe 'New Program page' do
     it 'navigates to the programs page' do
       gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
       program1 = gallery1.programs.create!(name: "Painting Lillies", number_of_participants: 26)
-
 
       visit "/galleries/#{gallery1.id}/programs/new"
 

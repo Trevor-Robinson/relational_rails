@@ -90,18 +90,16 @@ it 'sorts galleries by number of programs' do
     end
     it 'has a link to delete each gallery' do
       gallery1 = Gallery.create(name: "Painting Gallery", capacity: 30, tech_support: true)
-      gallery2 = Gallery.create!(name: "Clay Gallery", capacity: 15, tech_support: true)
 
       visit '/galleries'
 
-      within('#row-0') { expect(page).to have_button("Delete Gallery") }
       within('#row-1') { expect(page).to have_button("Delete Gallery") }
 
 
        click_on("Delete Gallery")
 
       expect(page).to have_current_path('/galleries')
-      expect(page).not_to have_content(gallery2.name)
+      expect(page).not_to have_content(gallery1.name)
     end
 
     describe 'site navigation' do
